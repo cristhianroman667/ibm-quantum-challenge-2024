@@ -24,12 +24,12 @@ service = QiskitRuntimeService(channel="ibm_quantum")
 backend = service.get_backend(backend_name)
 
 # Define Configs
-optimization_levels = "# Add your code here"
+optimization_levels = [1, 2, 3] "# Add your code here"
 pass_managers = [generate_preset_pass_manager(optimization_level=level, backend=backend) for level in optimization_levels]
 
 transpiler_services = [
-        TranspilerService( "# Add your code here" ),
-        TranspilerService( "# Add your code here" ),
+        TranspilerService(backend_name=backend_name, ai='false', optimization_level=3),
+        TranspilerService(backend_name=backend_name, ai='true', optimization_level=3),
     ]
 
 configs = pass_managers + transpiler_services
